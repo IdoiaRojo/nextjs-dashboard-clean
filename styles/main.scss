@@ -1,0 +1,177 @@
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: local('Roboto'), url(/fonts/roboto.woff2) format('woff2');
+}
+
+@font-face {
+  font-family: 'SofiaProLight';
+  font-weight: 300;
+  src: local('SofiaProLight'), url(/fonts/Sofia_Pro_Light.ttf) format('truetype');
+}
+
+@font-face {
+  font-family: 'SofiaProRegular';
+  font-weight: 500;
+  src: local('SofiaProRegular'), url(/fonts/Sofia_Pro_Regular.ttf) format('truetype');
+}
+
+@font-face {
+  font-family: 'SofiaProMedium';
+  font-weight: 600;
+  src: local('SofiaProMedium'), url(/fonts/Sofia_Pro_Medium.ttf) format('truetype');
+}
+
+@font-face {
+  font-family: 'SofiaProSemiBold';
+  font-weight: 700;
+  src: local('SofiaProSemiBold'), url(/fonts/Sofia_Pro_SemiBold.ttf) format('truetype');
+}
+
+@font-face {
+  font-family: 'SofiaProItalic';
+  font-weight: 500;
+  src: local('SofiaProMedium'), url(/fonts/Sofia-Pro-Italic.ttf) format('truetype');
+}
+
+@font-face {
+  font-family: 'OpenSansRegular';
+  font-weight: 400;
+  src: local('OpenSansRegular'), url(/fonts/OpenSans-Regular.ttf) format('truetype');
+}
+
+@font-face {
+  font-family: 'OpenSansSemiBold';
+  font-weight: 600;
+  src: local('OpenSansSemiBold'), url(/fonts/OpenSans-SemiBold.ttf) format('truetype');
+}
+
+$devisePalette: (blue: #4789FF,
+  hoverblue: #4789FF,
+  lightblue: #8BCAF7,
+  pink: #FF92AA,
+  lightgray: #FAFAFA,
+  gray: #D3D3D3,
+  darkgray: #555,
+  white: #FFFFFF);
+
+// @import "~bootstrap/scss/bootstrap";
+// @import './forms';
+// @import './login';
+@import './dashboard';
+
+html,
+body {
+  height: 100%;
+  padding: 0;
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+img {
+  max-width: 100%;
+}
+
+li {
+  list-style: none;
+}
+
+button.is-active {
+  background: #000;
+  color: #fff;
+}
+
+.partners-header .partners-nav .ifeelIcon img {
+  width: 62px;
+}
+
+input,
+select,
+textarea {
+  &:focus {
+    outline: none;
+  }
+}
+
+.content-with-top-menu {
+  padding-top: 85px;
+  height: 100%;
+}
+
+.card-white {
+  color: #183781;
+  text-align: left;
+  max-width: 350px;
+  margin: 50px auto;
+}
+
+#my_account_view {
+  display: flex;
+  padding: 85px 10% 0 10%;
+  max-width: 1440px;
+  margin: 0 auto;
+
+  & >.card-white {
+    color: #183781;
+    width: 50%;
+  }
+}
+
+.card-white {
+  h2 {
+    max-width: 350px;
+    color: #183781;
+    margin: 30px auto 25px;
+  }
+
+  h3 {
+    color: #3b5486;
+    font-family: 'SofiaProMedium', sans-serif;
+    font-size: 18px;
+    margin-bottom: 15px;
+  }
+}
+
+@media (max-width: 1500px) {
+
+  .content-with-top-menu,
+  #my_account_view {
+    padding-top: 65px;
+  }
+}
+
+
+
+
+
+.NavButton {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+
+  height: 100%;
+
+  cursor: pointer;
+
+  .Icon {
+    font-size: 20px;
+  }
+
+  .Label {
+    font-size: 12px;
+    text-transform: capitalize;
+  }
+}

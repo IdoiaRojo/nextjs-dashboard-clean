@@ -56,6 +56,14 @@ const Chart = ({ data_api, loading, t }) => {
                 data: data_api.qa
             },
             {
+                label: t('d_videocall'),
+                fill: false,
+                backgroundColor: 'rgba(75,192,192,0.4)',
+                borderColor: '#4789FF',
+                // pointStyle: 'line',
+                data: data_api.videocalls
+            },
+            {
                 label: t('d_therapy'),
                 fill: false,
                 backgroundColor: 'rgba(75,192,192,0.4)',

@@ -14,16 +14,16 @@ export const AuthProvider = ({ children }) => {
 
     useEffect(() => {
         async function loadUserFromCookies() {
+            console.log("FEIURFPIUFBIFB ------::::::::::::::: IUFUIOFUHF --------- :::::::");
             const token = Cookies.get('token')
             const email = Cookies.get('email')
             if (token && email) {
-                
-                console.log("Got a token in the cookies, let's see if it is valid")
-                //api.defaults.headers.Authorization = `Bearer ${token}`
-                //const { data: user } = await api.get('users/me')
                 getUserInfo(token, email).then(user => {
                     setUser(user);
                 });
+            } else {
+                setUser(null);
+                router.push('/login');
             }
             setLoading(false)
         }
@@ -32,7 +32,7 @@ export const AuthProvider = ({ children }) => {
 
 
     const signIn = async ({ email, password }) => {
-       
+
         var data = JSON.stringify({ "user": { "email": "ieadmin@yopmail.com", "password": "fake1234" } });
 
         var config = {
@@ -45,32 +45,19 @@ export const AuthProvider = ({ children }) => {
             data: data
         };
         return axios(config)
-         .then((response) => {
-             
-             console.log('hola me llamo ido');
-             console.log(response);
-             if (response.data.data.auth_token) {
-                const token = response.data.data.auth_token;
-                console.log("Got token")
-                Cookies.set('token', token, { expires: 60 })
-                // api.defaults.headers.Authorization = `Bearer ${token.token}`
-                // const { data: user } = await api.get('users/me')
-                // setUser(user)
-                // console.log("Got user", user)
-            }
-          //setUser(response.user);
-          //getUserAdditionalData(user);
-          //return response.user;
-          return response;
-         })
-         .catch((error) => {
-          return { error };
-         });
-       };
+            .then((response) => {
+                if (response.data.data.auth_token) {
+                    const token = response.data.data.auth_token;
+                    Cookies.set('token', token, { expires: 60 })
+                }
+                return response;
+            })
+            .catch((error) => {
+                return { error };
+            });
+    };
 
     const login = async (email, password) => {
-        debugger;
-
         var data = JSON.stringify({ "user": { "email": email, "password": password } });
 
         var config = {
@@ -86,8 +73,8 @@ export const AuthProvider = ({ children }) => {
         return axios(config)
             .then(res => {
                 debugger;
-                if(res.data.success && res.data.data.auth_token){
-                    const token = res.data.data.auth_token 
+                if (res.data.success && res.data.data.auth_token) {
+                    const token = res.data.data.auth_token
                     Cookies.set('token', token, { expires: 60 })
                     Cookies.set('email', email, { expires: 60 })
                     var config2 = {
@@ -104,31 +91,31 @@ export const AuthProvider = ({ children }) => {
                         console.log('res2');
                         console.log(res2);
                         debugger;
-                        
-                        if(res2.status == 200 && res2.data.user){
-                            
+
+                        if (res2.status == 200 && res2.data.user) {
+
                             setUser(res2.data.user.id, res2.data.user.email);
                             router.push('/dashboard');
-                        }else{
+                        } else {
                             setUser(null);
                             router.push('/login');
                         }
-                        
+
                         // console.log("Got user", user)
                     });
-                    
-                    
-                }else{
-                    
+
+
+                } else {
+
                     setUser(null);
                     router.push('/login');
                 }
             })
-            
+
     }
 
     const getCheckToken = (token, email) => {
-        
+
         var data = JSON.stringify({ "email": email, "token": token });
         var config = {
             method: 'post',
@@ -141,19 +128,19 @@ export const AuthProvider = ({ children }) => {
             },
             data: data
         };
-        
+
         return axios(config).then(res => {
             console.log(`check_token:`);
             console.log(res);
-            if(res.status == 200 && res.data.success){
-                router.push('/dashboard');                
-            }else{
+            if (res.status == 200 && res.data.success) {
+                router.push('/dashboard');
+            } else {
                 router.push('/login');
             }
         });
     }
     const getUserInfo = (token, email) => {
-        
+
         var data = JSON.stringify({ "email": email, "token": token });
         var config = {
             method: 'get',
@@ -167,13 +154,13 @@ export const AuthProvider = ({ children }) => {
             },
             data: data
         };
-        
+
         return axios(config).then(res => {
             console.log(`my:`);
             console.log(res);
-            if(res.status == 200 && res.data.user){
-                return res.data.user;               
-            }else{
+            if (res.status == 200 && res.data.user) {
+                return res.data.user;
+            } else {
                 router.push('/login');
             }
         });
@@ -182,7 +169,7 @@ export const AuthProvider = ({ children }) => {
     const logout = () => {
         const token = Cookies.get('token')
         const email = Cookies.get('email')
-       
+
         var config = {
             method: 'delete',
             url: 'http://localhost:3000/api/v3/sessions',
@@ -200,33 +187,18 @@ export const AuthProvider = ({ children }) => {
             'X-User-Email': email
         };
         const url = 'http://localhost:3000/api/v3/sessions';
-        // api.defaults.headers."X-User-Token" = token.token
-        // api.defaults.headers."X-User-Email" = email
-        //const { data: user } = await 
-        //return axios(config).then(res => {
-        return axios.delete(url, {headers: httpReqHeaders}).then(res => {
+        return axios.delete(url, { headers: httpReqHeaders }).then(res => {
             console.log('res delete');
             console.log(res);
-            if(res.status == 200 && res.data.success){
-                
-                // setUser(res2.data.user.id, res2.data.user.email)
+            if (res.status == 200 && res.data.success) {
                 Cookies.remove('token')
                 Cookies.remove('email')
                 setUser(null)
                 window.location.pathname = '/login'
             }
-            
-            // console.log("Got user", user)
+
         });
-        //axios.delete(url, {headers:{Authorization: "token"}})
-
-
-        // Cookies.remove('token')
-        // setUser(null)
-        // delete api.defaults.headers.Authorization
-        // window.location.pathname = '/login'
     }
-
 
     return (
         <AuthContext.Provider value={{ isAuthenticated: !!user, user, login, loading, logout, signIn }}>
@@ -234,8 +206,6 @@ export const AuthProvider = ({ children }) => {
         </AuthContext.Provider>
     )
 }
-
-
 
 export const useAuth = () => useContext(AuthContext)
 

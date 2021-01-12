@@ -60,6 +60,7 @@ $devisePalette: (blue: #4789FF,
 // @import "~bootstrap/scss/bootstrap";
 // @import './forms';
 // @import './login';
+@import './c3jscustom';
 @import './dashboard';
 
 html,
@@ -88,13 +89,43 @@ li {
   list-style: none;
 }
 
+.layout-container {
+  background: #fff;
+}
+
+.section {
+  margin-top: 80px;
+}
+
 button.is-active {
   background: #000;
   color: #fff;
 }
 
-.partners-header .partners-nav .ifeelIcon img {
-  width: 62px;
+.header-div {
+  border-bottom: 1px solid #dee2e6;
+
+  .nav-tabs {
+    max-width: 1100px;
+    margin: 0 auto;
+    border-bottom: none;
+  }
+}
+
+.partners-header {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 10px 0 0;
+
+  .partners-nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    .ifeelIcon img {
+      width: 62px;
+    }
+  }
 }
 
 input,
@@ -123,7 +154,7 @@ textarea {
   max-width: 1440px;
   margin: 0 auto;
 
-  & >.card-white {
+  &>.card-white {
     color: #183781;
     width: 50%;
   }

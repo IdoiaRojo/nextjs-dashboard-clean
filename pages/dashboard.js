@@ -2,20 +2,18 @@ import React, { useState } from 'react';
 import Chart from '@/components/chart'
 import { withTranslation } from '../i18n'
 import { useRouter } from 'next/router';
-// import { useGetDashboardData } from '@/actions/dashboard';
+import { useAuth } from '@/hooks/useAuth'
+
 import BaseLayout from '@/components/layouts/BaseLayout';
 
-// import { getDashboardData } from '../utils/dashboard_data';
-import ApiService from "../services/api";
+import ApiService from "@/services/api";
 
-
-const Dashboard = ({dashboardDataInitial, t }) => {
+const Dashboard = ({ dashboardDataInitial, t }) => {
+  const { user, loading } = useAuth();
   const [dashboardData, setData] = useState(dashboardDataInitial);
   const router = useRouter();
 
   const fetchData = async (select_time) => {
-    console.log("select_time");
-    console.log(select_time);
     const dashboardData = await ApiService.getDashboardDataApi(select_time);
     return setData(dashboardData);
   };
@@ -26,22 +24,20 @@ const Dashboard = ({dashboardDataInitial, t }) => {
 
   return (
     <>
-      
+      <BaseLayout
+        user={user}
+        loading={loading}
+        navClass="transparent"
+        className="cover">
+
         <div className="row" id="partner-dashboard">
           <div className="container" id="">
-            {/* {user &&
+            {user &&
               <h1 className="title">{user.name} dashboard</h1>
-            } */}
-            {/* {loading &&
+            }
+            {loading &&
               <p>Loading ...</p>
-            } */}
-            
-
-            <p></p>
-
-            {/* {loading_dashboard &&
-              <p>Loading ...</p>
-            } */}
+            }
             {dashboardData &&
               <div>
                 <div>
@@ -89,12 +85,11 @@ const Dashboard = ({dashboardDataInitial, t }) => {
             }
           </div>
         </div>
-      
+      </BaseLayout>
     </>
   )
 }
 
-//export const getServerSideProps = getDashboardData();
 export async function getServerSideProps(context) {
   return {
     props: {

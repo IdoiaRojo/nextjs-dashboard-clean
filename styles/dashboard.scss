@@ -4,7 +4,7 @@
     padding: 50px 0;
 
     .container {
-        max-width: 900px;
+        max-width: 1100px;
         margin: 0 auto;
         text-align: left;
         padding: 0;
@@ -21,14 +21,17 @@
         flex-direction: row;
         align-items: center;
         justify-content: space-between;
+
         li {
             font-family: "SofiaProRegular", sans-serif;
             font-size: 20px;
         }
-        select.nav-link{
+
+        select.nav-link {
             border: none;
             background: none;
         }
+
         .dropdown {
             flex: 1;
             text-align: right;
@@ -167,6 +170,7 @@
     font-size: 20px;
     margin: 0;
 }
+
 .secsubtitle {
     font-family: "OpenSansRegular", sans-serif;
     font-size: 15px;

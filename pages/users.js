@@ -2,7 +2,7 @@ import React, { Component, useState } from "react";
 import { withTranslation } from '../i18n'
 import BaseLayout from '@/components/layouts/BaseLayout';
 import UsersTable from '@/components/UsersTable';
-import Chart from '@/components/chart'
+import Chart from '@/components/Chart'
 import ChartContentView from '@/components/charts/ChartContentView'
 import ChartChat from '@/components/charts/ChartChat'
 import ChartVideo from '@/components/charts/ChartVideo'

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import Chart from '@/components/chart'
+import Chart from '@/components/Chart'
 import { withTranslation } from '../i18n'
 import { useRouter } from 'next/router';
 import { useAuth } from '@/hooks/useAuth'

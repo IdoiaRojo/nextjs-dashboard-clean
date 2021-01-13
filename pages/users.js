@@ -849,7 +849,7 @@ const Users = ({ dashboardDataInitial, usersInitial, t }) => {
 export async function getServerSideProps(context) {
   const usersInitial = await ApiService.getUsersDataApi(context.req);
   const dashboardDataInitial = await ApiService.getDashboardDataApi('week', context.req);
-  if (usersInitial == null || dashboardDataInitial) {
+  if (usersInitial == null || dashboardDataInitial == null) {
     context.res.setHeader("location", "/login");
     context.res.statusCode = 302;
     context.res.end();

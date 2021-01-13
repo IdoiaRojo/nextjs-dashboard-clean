@@ -7,9 +7,9 @@ import LoginForm from '@/components/LoginForm'
 const Login = ({ t }) => {
   const router = useRouter();
   const { user, loading } = useAuth();
-  if (user) {
-    router.push("/users");
-  }
+  // if (user) {
+  //   router.push("/users");
+  // }
   return (
     <div className="register-body">
       <div id="partner-login">

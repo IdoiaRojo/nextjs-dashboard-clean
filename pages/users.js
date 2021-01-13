@@ -92,35 +92,6 @@ const Users = ({ dashboardDataInitial, usersInitial, t }) => {
             </div>
             <Grid.Row cards={true}>
               {dashboardData &&
-                <>
-                  <Grid.Col width={dash_col} s3={4} lg={dash_col}>
-                    <StatsCard layout={1} movement={6} total={dashboardData.data.dashboard_data[0]['total_users']} label={t('d_users')} />
-                  </Grid.Col>
-
-                  <Grid.Col width={dash_col} s3={4} lg={dash_col}>
-                    <StatsCard
-                      layout={1}
-                      movement={-3}
-                      total={dashboardData.data.dashboard_data[0]['journey']}
-                      label={t('d_journey')}
-                    />
-                  </Grid.Col>
-
-                  <Grid.Col width={dash_col} s3={4} lg={dash_col}>
-                    <StatsCard layout={1} movement={9} total={dashboardData.data.dashboard_data[0]['qa']} label={t('d_qa')} />
-                  </Grid.Col>
-
-                  <Grid.Col width={dash_col} s3={4} lg={dash_col}>
-                    <StatsCard
-                      layout={1}
-                      movement={3}
-                      total={dashboardData.data.dashboard_data[0]['therapy']}
-                      label={t('d_therapy')}
-                    />
-                  </Grid.Col>
-                </>
-              }
-              {dashboardData &&
                 <Grid.Col className="section" lg={12}>
                   <h3 className="sectitle">Content view</h3>
                   <ChartContentView data_api={dashboardData.data.content_view} />
@@ -837,6 +808,35 @@ const Users = ({ dashboardDataInitial, usersInitial, t }) => {
                   />
                 </Card>
               </Grid.Col>
+              {dashboardData &&
+                <>
+                  <Grid.Col width={dash_col} s3={4} lg={dash_col}>
+                    <StatsCard layout={1} movement={6} total={dashboardData.data.dashboard_data[0]['total_users']} label={t('d_users')} />
+                  </Grid.Col>
+
+                  <Grid.Col width={dash_col} s3={4} lg={dash_col}>
+                    <StatsCard
+                      layout={1}
+                      movement={-3}
+                      total={dashboardData.data.dashboard_data[0]['journey']}
+                      label={t('d_journey')}
+                    />
+                  </Grid.Col>
+
+                  <Grid.Col width={dash_col} s3={4} lg={dash_col}>
+                    <StatsCard layout={1} movement={9} total={dashboardData.data.dashboard_data[0]['qa']} label={t('d_qa')} />
+                  </Grid.Col>
+
+                  <Grid.Col width={dash_col} s3={4} lg={dash_col}>
+                    <StatsCard
+                      layout={1}
+                      movement={3}
+                      total={dashboardData.data.dashboard_data[0]['therapy']}
+                      label={t('d_therapy')}
+                    />
+                  </Grid.Col>
+                </>
+              }
             </Grid.Row>
 
           </div>
@@ -847,12 +847,20 @@ const Users = ({ dashboardDataInitial, usersInitial, t }) => {
 }
 
 export async function getServerSideProps(context) {
+  const usersInitial = await ApiService.getUsersDataApi(context.req);
+  const dashboardDataInitial = await ApiService.getDashboardDataApi('week', context.req);
+  if (usersInitial == null || dashboardDataInitial) {
+    context.res.setHeader("location", "/login");
+    context.res.statusCode = 302;
+    context.res.end();
+  }
+
   return {
     props: {
-      usersInitial: await ApiService.getUsersDataApi(context.req),
-      dashboardDataInitial: await ApiService.getDashboardDataApi('ween', context.req),
+      usersInitial: usersInitial,
+      dashboardDataInitial: dashboardDataInitial,
     },
   };
 }
 
-export default withTranslation('dashboard')(Users);
+export default withTranslation('common')(Users);

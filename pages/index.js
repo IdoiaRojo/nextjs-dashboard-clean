@@ -1,7 +1,15 @@
 import Head from 'next/head'
+import { useRouter } from 'next/router';
 import styles from '../styles/Home.module.css'
 
+import { useAuth } from '@/hooks/useAuth';
+
 export default function Home() {
+  const router = useRouter();
+  const { user, loading } = useAuth();
+  if (user) {
+    router.push("/users");
+  }
   return (
     <div className={styles.container}>
       <Head>

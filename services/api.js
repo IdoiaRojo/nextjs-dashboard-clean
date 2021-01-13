@@ -1,21 +1,24 @@
 import Cookies from "cookies";
 import CookiesJS from 'js-cookie';
 
+// const urlBackV3 = "http://localhost:3000/api/v3"
+const urlBackV3 = "https://staging.ifeelonline.com/api/v3"
+
 async function getDashboardDataApi(select_time, req) {
+    var userId = null;
     var token = null;
     var email = null;
     if (req) {
         const cookies = new Cookies(req);
-        //const userId = cookies.get('userId');
-        var userId = 14;
-        token = cookies.get('token');
-        email = cookies.get('email');
+        var userId = cookies.get('userId');
+        var token = cookies.get('token');
+        var email = cookies.get('email');
     } else {
-        var userId = 14;
-        token = CookiesJS.get('token');
-        email = CookiesJS.get('email');
+        var userId = CookiesJS.get('userId');
+        var token = CookiesJS.get('token');
+        var email = CookiesJS.get('email');
     }
-    if (token) {
+    if (token && userId && email) {
         var myHeaders = new Headers();
         myHeaders.append("X-User-Token", token);
         myHeaders.append("X-User-Email", email);
@@ -26,10 +29,7 @@ async function getDashboardDataApi(select_time, req) {
             redirect: 'follow'
         };
         try {
-            const response = await fetch(`http://localhost:3000/api/v3/partner/dashboard_select_date?id=${userId}&select_time=${select_time}`, requestOptions);
-            console.log("------------ response ------------ ");
-            console.log(response);
-            console.log(response.data);
+            const response = await fetch(`${urlBackV3}/partner/dashboard_select_date?id=${userId}&select_time=${select_time}`, requestOptions);
             const data = await response.json();
             return JSON.parse(JSON.stringify(data));
         } catch (e) {
@@ -44,38 +44,37 @@ async function getDashboardDataApi(select_time, req) {
 }
 
 async function getUsersDataApi(req) {
-    console.log("----------- req ----------- ".toUpperCase);
-    console.log(req);
+    var userId = null;
+    var token = null;
+    var email = null;
     if (req) {
         const cookies = new Cookies(req);
-        //const userId = cookies.get('userId');
-        var userId = 14;
+        var userId = cookies.get('userId');
         var token = cookies.get('token');
         var email = cookies.get('email');
     } else {
-        var userId = 14;
+        var userId = CookiesJS.get('userId');
         var token = CookiesJS.get('token');
         var email = CookiesJS.get('email');
     }
+    if (token && userId && email) {
+        var myHeaders = new Headers();
+        myHeaders.append("X-User-Token", token);
+        myHeaders.append("X-User-Email", email);
 
-    var myHeaders = new Headers();
-    myHeaders.append("X-User-Token", token);
-    myHeaders.append("X-User-Email", email);
-
-    var requestOptions = {
-        method: 'GET',
-        headers: myHeaders,
-        redirect: 'follow'
-    };
-    try {
-        const response = await fetch(`http://localhost:3000/api/v3/partner/users?id=${userId}`, requestOptions);
-        console.log(response);
-        const data = await response.json();
-        return JSON.parse(JSON.stringify(data));
-    } catch (e) {
-        console.log(e);
-        //error = e.toString();
-        return null;
+        var requestOptions = {
+            method: 'GET',
+            headers: myHeaders,
+            redirect: 'follow'
+        };
+        try {
+            const response = await fetch(`${urlBackV3}/partner/users?id=${userId}`, requestOptions);
+            const data = await response.json();
+            return JSON.parse(JSON.stringify(data));
+        } catch (e) {
+            console.log(e);
+            return null;
+        }
     }
 }
 

@@ -44,7 +44,6 @@ const BaseLayout = props => {
                 />
             </div>
 
-
             <main className={`cover ${className}`}>
                 <div className="wrapper">
                     {children}

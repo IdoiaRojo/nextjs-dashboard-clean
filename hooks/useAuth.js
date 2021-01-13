@@ -11,10 +11,11 @@ export const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null)
     const [loading, setLoading] = useState(true)
     const router = useRouter()
+    const urlBackV3 = "https://staging.ifeelonline.com/api/v3"
+    // const urlBackV3 = "http://localhost:3000/api/v3"
 
     useEffect(() => {
         async function loadUserFromCookies() {
-            console.log("FEIURFPIUFBIFB ------::::::::::::::: IUFUIOFUHF --------- :::::::");
             const token = Cookies.get('token')
             const email = Cookies.get('email')
             if (token && email) {
@@ -31,38 +32,38 @@ export const AuthProvider = ({ children }) => {
     }, [])
 
 
-    const signIn = async ({ email, password }) => {
+    // const signIn = async ({ email, password }) => {
 
-        var data = JSON.stringify({ "user": { "email": "ieadmin@yopmail.com", "password": "fake1234" } });
+    //     var data = JSON.stringify({ "user": { "email": email, "password": password } });
 
-        var config = {
-            method: 'post',
-            url: 'http://localhost:3000/api/v3/sessions',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            },
-            data: data
-        };
-        return axios(config)
-            .then((response) => {
-                if (response.data.data.auth_token) {
-                    const token = response.data.data.auth_token;
-                    Cookies.set('token', token, { expires: 60 })
-                }
-                return response;
-            })
-            .catch((error) => {
-                return { error };
-            });
-    };
+    //     var config = {
+    //         method: 'post',
+    //         url: 'http://localhost:3000/api/v3/sessions',
+    //         headers: {
+    //             'Accept': 'application/json',
+    //             'Content-Type': 'application/json'
+    //         },
+    //         data: data
+    //     };
+    //     return axios(config)
+    //         .then((response) => {
+    //             if (response.data.data.auth_token) {
+    //                 const token = response.data.data.auth_token;
+    //                 Cookies.set('token', token, { expires: 60 })
+    //             }
+    //             return response;
+    //         })
+    //         .catch((error) => {
+    //             return { error };
+    //         });
+    // };
 
     const login = async (email, password) => {
         var data = JSON.stringify({ "user": { "email": email, "password": password } });
 
         var config = {
             method: 'post',
-            url: 'http://localhost:3000/api/v3/sessions',
+            url: `${urlBackV3}/sessions`,
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
@@ -72,14 +73,13 @@ export const AuthProvider = ({ children }) => {
         //const {res} = await axios(config);
         return axios(config)
             .then(res => {
-                debugger;
                 if (res.data.success && res.data.data.auth_token) {
                     const token = res.data.data.auth_token
                     Cookies.set('token', token, { expires: 60 })
                     Cookies.set('email', email, { expires: 60 })
                     var config2 = {
                         method: 'get',
-                        url: 'http://localhost:3000/api/v3/users/my',
+                        url: `${urlBackV3}/users/my`,
                         headers: {
                             'Accept': 'application/json',
                             'Content-Type': 'application/json',
@@ -88,14 +88,11 @@ export const AuthProvider = ({ children }) => {
                         }
                     };
                     return axios(config2).then(res2 => {
-                        console.log('res2');
-                        console.log(res2);
-                        debugger;
 
                         if (res2.status == 200 && res2.data.user) {
-
+                            Cookies.set('userId', res2.data.user.id, { expires: 60 })
                             setUser(res2.data.user.id, res2.data.user.email);
-                            router.push('/dashboard');
+                            router.push('/users');
                         } else {
                             setUser(null);
                             router.push('/login');
@@ -110,7 +107,15 @@ export const AuthProvider = ({ children }) => {
                     setUser(null);
                     router.push('/login');
                 }
-            })
+            }).catch(function (error) {
+                console.log(error); // 401
+                //console.log(error.response.data.error); //Please Authenticate or whatever returned from server
+                //if (error.response.status == 401) {
+                // setUser(null);
+                // router.push('/login');
+                return { error };
+                //}
+            });
 
     }
 
@@ -119,7 +124,7 @@ export const AuthProvider = ({ children }) => {
         var data = JSON.stringify({ "email": email, "token": token });
         var config = {
             method: 'post',
-            url: 'http://localhost:3000/api/v3/users/check_token',
+            url: `${urlBackV3}/users/check_token`,
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
@@ -130,10 +135,8 @@ export const AuthProvider = ({ children }) => {
         };
 
         return axios(config).then(res => {
-            console.log(`check_token:`);
-            console.log(res);
             if (res.status == 200 && res.data.success) {
-                router.push('/dashboard');
+                router.push('/users');
             } else {
                 router.push('/login');
             }
@@ -145,7 +148,7 @@ export const AuthProvider = ({ children }) => {
         var config = {
             method: 'get',
             //url: 'http://localhost:3000/api/v3/users/my?timezone=Europe/Madrid&source=web',
-            url: 'http://localhost:3000/api/v3/users/my',
+            url: `${urlBackV3}/users/my`,
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
@@ -156,8 +159,6 @@ export const AuthProvider = ({ children }) => {
         };
 
         return axios(config).then(res => {
-            console.log(`my:`);
-            console.log(res);
             if (res.status == 200 && res.data.user) {
                 return res.data.user;
             } else {
@@ -172,7 +173,7 @@ export const AuthProvider = ({ children }) => {
 
         var config = {
             method: 'delete',
-            url: 'http://localhost:3000/api/v3/sessions',
+            url: `${urlBackV3}/sessions`,
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
@@ -186,10 +187,8 @@ export const AuthProvider = ({ children }) => {
             'X-User-Token': token,
             'X-User-Email': email
         };
-        const url = 'http://localhost:3000/api/v3/sessions';
+        const url = `${urlBackV3}/sessions`;
         return axios.delete(url, { headers: httpReqHeaders }).then(res => {
-            console.log('res delete');
-            console.log(res);
             if (res.status == 200 && res.data.success) {
                 Cookies.remove('token')
                 Cookies.remove('email')
@@ -201,7 +200,7 @@ export const AuthProvider = ({ children }) => {
     }
 
     return (
-        <AuthContext.Provider value={{ isAuthenticated: !!user, user, login, loading, logout, signIn }}>
+        <AuthContext.Provider value={{ isAuthenticated: !!user, user, login, loading, logout }}>
             {children}
         </AuthContext.Provider>
     )

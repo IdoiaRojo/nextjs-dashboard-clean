@@ -1,9 +1,15 @@
-import { withTranslation } from '../i18n'
+import { withTranslation } from '../i18n';
+import { useRouter } from 'next/router';
 
+import { useAuth } from '@/hooks/useAuth';
 import LoginForm from '@/components/LoginForm'
 
-const Login = ({t}) => {
-
+const Login = ({ t }) => {
+  const router = useRouter();
+  const { user, loading } = useAuth();
+  if (user) {
+    router.push("/users");
+  }
   return (
     <div className="register-body">
       <div id="partner-login">
@@ -33,4 +39,4 @@ const Login = ({t}) => {
   )
 }
 
-export default withTranslation('forms')(Login);
+export default withTranslation('common')(Login);

@@ -1,0 +1,180 @@
+#__next {
+    height: 100%;
+}
+
+.register-body {
+    height: 100%;
+    background: #F4F6FA
+}
+
+.photo-login {
+    background: url('/images/img_login-min.jpg') no-repeat center;
+    background-size: cover;
+    height: 100%;
+}
+
+#partner-login .forms-container.new-styles-form #new_user {
+    max-width: 100%;
+}
+
+#partner-login {
+    text-align: left;
+    color: #153877;
+    padding-top: 50px;
+    max-width: 960px;
+    height: 600px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+
+    #partner-login-form {
+        background: #fff;
+        border: 1px solid #EBE7E7;
+        border-radius: 6px;
+        margin-bottom: 40px;
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        margin: 0 0 40px;
+        height: 100%;
+    }
+
+    #new_user,
+    #edit_user {
+        background-color: transparent;
+        box-shadow: none;
+    }
+
+    .nav-partners,
+    .title,
+    .forms-container {
+        max-width: 550px;
+        margin: 0 auto;
+    }
+
+    .forms-container {
+        padding-bottom: 0;
+    }
+
+    .form-login {
+        padding: 40px;
+        text-align: left;
+    }
+
+    .form-login,
+    .photo-login {
+        width: 50%;
+        //float: left;
+    }
+
+    .icon img{
+        width: 64px;
+    }
+
+    .language {
+        display: block;
+        text-align: right;
+
+        a {
+            font-size: 14px;
+            padding: 0;
+            font-family: "SofiaProMedium", sans-serif;
+            line-height: 1;
+            margin: 15px 0 30px 0;
+            color: #6A83B1;
+            text-decoration: none;
+            margin-right: 24px;
+
+            &.active {
+                color: #4789FF;
+                border-bottom: 1px solid #4789FF;
+            }
+
+            &:hover {
+                text-decoration: none;
+                color: #4789FF;
+            }
+        }
+    }
+
+    .title {
+        font-size: 40px;
+        margin-top: 20px;
+        margin-bottom: 10px;
+        font-family: "SofiaProMedium", sans-serif;
+    }
+
+    .subtitle {
+        font-size: 15px;
+        padding: 0;
+        font-family: "OpenSansRegular", sans-serif;
+        line-height: 1;
+        margin: 15px 0 30px 0;
+    }
+
+    .form-login {
+        padding-right: 20px;
+    }
+
+    .photo-login {
+        padding-left: 20px;
+        width: 50%;
+
+        img {
+            max-height: 572px;
+            height: 100%;
+            width: auto;
+        }
+    }
+}
+
+
+
+// input {
+//     height: auto;
+//     padding: 10px 0 8px !important;
+//     border: none;
+//     box-shadow: none;
+//     padding-left: 0px;
+//     background: none;
+//     border-bottom: 1px solid #6A83B1 !important;
+//     color: #153777 !important;
+//     font-family: "SofiaProMedium", sans-serif;
+//     font-size: 14px;
+//     margin: 0;
+//     width: 100%;
+//     &::placeholder {
+//         color: #6A83B1 !important;
+//     }
+//     &:focus::placeholder {
+//         color: transparent !important;
+//     }
+//     &:focus {
+//         box-shadow: none;
+//         background: none;
+//         outline: none;
+//     }
+// }
+.btn {
+    font-size: 18px;
+    border-radius: 6px;
+    min-width: 235px;
+    font-family: 'SofiaProRegular', sans-serif;
+    color: #fff;
+    margin: 20px auto 10px;
+    background-color: #4789ff;
+    transition: all 1s;
+    padding: 9px 30px;
+    width: auto;
+    box-shadow: none;
+    border: none;
+}
+
+.btns{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    .lost-pass{
+        color: #4789ff;
+    }
+}

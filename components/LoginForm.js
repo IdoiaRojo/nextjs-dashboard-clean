@@ -7,7 +7,7 @@ import { useAuth } from '@/hooks/useAuth';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 
-const LoginForm = ({t}) => {
+const LoginForm = ({ t }) => {
   const [loginError, setLoginError] = useState('');
   //const [email, setEmail] = useState('');
   //const [password, setPassword] = useState('');
@@ -30,9 +30,11 @@ const LoginForm = ({t}) => {
     }),
     onSubmit: async (values) => {
       console.log(values);
-      return auth.login( values.email, values.password).then((res) => {
+      return auth.login(values.email, values.password).then((res) => {
         console.log(res);
-        router.push('/dashboard');
+        if (!res.error) {
+          router.push('/users');
+        }
       });
     }
   });
@@ -57,7 +59,7 @@ const LoginForm = ({t}) => {
           type="password"
           name="password"
           value={formik.values.password}
-          onChange={formik.handleChange}/>
+          onChange={formik.handleChange} />
       </div>
       {formik.touched.password && formik.errors.password ? (
         <p className="form-control-error">{formik.errors.password}</p>
@@ -66,12 +68,12 @@ const LoginForm = ({t}) => {
         <button name="button" type="submit" className="btn BtnSubmit">Enter</button>
         <a className="lost-pass" href="/users/password/new?page_access=partner">Lost password?</a>
       </div>
-    
-      {loginError && 
+
+      {loginError &&
         <p className="form-control-error">{loginError}</p>
       }
     </form>
   )
 }
 
-export default withTranslation('forms')(LoginForm);
+export default withTranslation('common')(LoginForm);

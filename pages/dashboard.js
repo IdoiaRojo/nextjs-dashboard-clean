@@ -98,4 +98,4 @@ export async function getServerSideProps(context) {
   };
 }
 
-export default withTranslation('dashboard')(Dashboard);
+export default withTranslation('common')(Dashboard);

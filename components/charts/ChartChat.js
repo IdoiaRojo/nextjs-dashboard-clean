@@ -62,4 +62,4 @@ const ChartChat = ({ data_api, loading, t }) => {
     );
 }
 
-export default withTranslation('dashboard')(ChartChat);
+export default withTranslation('common')(ChartChat);

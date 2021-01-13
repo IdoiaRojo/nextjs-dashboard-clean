@@ -1,9 +1,0 @@
-{
-  "sign_in": "Inicia sesión",
-  "email_placeholder": "tu@email.com",
-  "password": "Contraseña",
-  "email_required": "El email es obligatorio",
-  "email_not_valid": "El email no es válido",
-  "password_required": "La contraseña es obligatoria",
-  "min_7_chars": "La contraseña debe contener más de 7 caracteres"
-}

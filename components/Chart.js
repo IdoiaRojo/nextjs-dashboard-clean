@@ -148,4 +148,4 @@ const Chart = ({ data_api, loading, t }) => {
     );
 }
 
-export default withTranslation('dashboard')(Chart);
+export default withTranslation('common')(Chart);

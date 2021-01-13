@@ -59,7 +59,7 @@ $devisePalette: (blue: #4789FF,
 
 // @import "~bootstrap/scss/bootstrap";
 // @import './forms';
-// @import './login';
+@import './login';
 @import './c3jscustom';
 @import './dashboard';
 
@@ -145,12 +145,28 @@ textarea {
   color: #183781;
   text-align: left;
   max-width: 350px;
-  margin: 50px auto;
+  margin: 20px auto;
+}
+
+.new_styles .btn {
+  font-size: 16px;
+  border-radius: 6px;
+  min-width: 235px;
+  font-family: 'SofiaProLight', sans-serif;
+  font-weight: lighter;
+  color: #fff;
+  margin-top: 22px;
+  background-color: #4789ff;
+  transition: all .2s;
+  padding: 5px 30px;
+  width: auto;
+  opacity: 1;
+  letter-spacing: 0.96px;
 }
 
 #my_account_view {
   display: flex;
-  padding: 85px 10% 0 10%;
+  padding: 0;
   max-width: 1440px;
   margin: 0 auto;
 
@@ -173,18 +189,63 @@ textarea {
     font-size: 18px;
     margin-bottom: 15px;
   }
+
 }
 
-@media (max-width: 1500px) {
+.input-row {
+  font-size: 15px;
+  padding: 1px;
+  display: block;
+  width: 100%;
+  overflow: hidden;
+  margin-bottom: 14px;
 
-  .content-with-top-menu,
-  #my_account_view {
-    padding-top: 65px;
+  label {
+    font-family: 'OpenSansRegular', sans-serif;
+    font-weight: lighter;
+    font-size: 12px;
+    color: #94A5CD;
+  }
+
+  input,
+  textarea {
+    padding: 6px 7px;
+    line-height: 25px;
+    font-size: 14px !important;
+    border-radius: 4px;
+    box-shadow: none !important;
+    border: 1px solid #E5ECFD;
+    height: 42px;
+    margin-bottom: 0;
+    color: #173A90;
+    background: #F5F8FD;
+    display: block;
+    width: 100%;
+  }
+
+  input[type="radio"],
+  input[type="checkbox"] {
+    width: 19px;
+    height: 19px;
+    margin-right: 10px;
+    display: inline-block;
+  }
+
+  .radio-input {
+    display: flex;
+    align-items: center;
+
+    label {
+      margin-bottom: 0;
+    }
+
+    .radio-new-style {
+      margin-right: 20px;
+      display: flex;
+      align-items: center;
+    }
   }
 }
-
-
-
 
 
 .NavButton {

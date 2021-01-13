@@ -53,4 +53,4 @@ const ChartVideo = ({ data_api, loading, t }) => {
     );
 }
 
-export default withTranslation('dashboard')(ChartVideo);
+export default withTranslation('common')(ChartVideo);

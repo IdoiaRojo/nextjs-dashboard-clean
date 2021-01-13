@@ -75,4 +75,4 @@ const ChartContentView = ({ data_api, loading, t }) => {
     );
 }
 
-export default withTranslation('dashboard')(ChartContentView);
+export default withTranslation('common')(ChartContentView);

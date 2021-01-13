@@ -28,8 +28,7 @@ const Header = ({ user, loading, className, t }) => {
     const [isOpen, setIsOpen] = useState(false);
     const toggle = () => setIsOpen(!isOpen);
     const auth = useAuth();
-    const handleClick = (e) => {
-        e.preventDefault();
+    const handleClick = () => {
         auth.logout().then((res) => {
             console.log(res);
             // router.push('/dashboard');
@@ -48,17 +47,17 @@ const Header = ({ user, loading, className, t }) => {
                         <div>
                             {/* <NavBar navButtons={navButtons} /> */}
                             <AccountDropdown
-                                avatarURL={"http://localhost:3000" + user.safe_avatar_url}
+                                avatarURL={"https://staging.ifeelonline.com" + user.safe_avatar_url}
                                 name={user.nickname}
                                 description="Administrator"
                                 options={[
-                                    "profile",
+                                    { icon: "user", value: "My account", to: "/my_account" },
                                     { icon: "settings", value: "Settings", to: "/settings" },
                                     "mail",
                                     "message",
                                     "divider",
                                     "help",
-                                    "logout",
+                                    { icon: "logout", value: "logout", onClick: () => handleClick() },
                                 ]}
                             />
 

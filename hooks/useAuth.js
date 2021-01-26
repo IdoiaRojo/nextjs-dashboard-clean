@@ -92,15 +92,12 @@ export const AuthProvider = ({ children }) => {
                         if (res2.status == 200 && res2.data.user) {
                             Cookies.set('userId', res2.data.user.id, { expires: 60 })
                             setUser(res2.data.user.id, res2.data.user.email);
-                            router.push('/users');
+                            router.push('/DashboardComplete');
                         } else {
                             setUser(null);
                             router.push('/login');
                         }
-
-                        // console.log("Got user", user)
                     });
-
 
                 } else {
 
@@ -108,6 +105,7 @@ export const AuthProvider = ({ children }) => {
                     router.push('/login');
                 }
             }).catch(function (error) {
+                console.log("------ ERROR -------"); // 401
                 console.log(error); // 401
                 //console.log(error.response.data.error); //Please Authenticate or whatever returned from server
                 //if (error.response.status == 401) {

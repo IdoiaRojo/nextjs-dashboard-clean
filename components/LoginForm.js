@@ -4,11 +4,14 @@ import { withTranslation } from '../i18n'
 import { useRouter } from 'next/router';
 import { useAuth } from '@/hooks/useAuth';
 
+import ToastComponent from '@/components/shared/ToastComponent';
+
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 
 const LoginForm = ({ t }) => {
   const [loginError, setLoginError] = useState('');
+  const [toast, setToast] = useState('');
   //const [email, setEmail] = useState('');
   //const [password, setPassword] = useState('');
   const router = useRouter();
@@ -30,17 +33,26 @@ const LoginForm = ({ t }) => {
     }),
     onSubmit: async (values) => {
       console.log(values);
+      setToast('');
       return auth.login(values.email, values.password).then((res) => {
         console.log(res);
         if (!res.error) {
-          router.push('/users');
+          router.push('/DashboardComplete');
+        } else {
+          console.log('otro errorsito');
+          setLoginError(res.error && res.error.message ? res.error.message : 'Se ha producido un error');
+          setToast(res.error && res.error.message ? res.error.message : 'Se ha producido un error');
         }
       });
     }
   });
 
   return (
-    <form className="new_user" onSubmit={formik.handleSubmit}>
+    <form className="new_user" onSubmit={formik.handleSubmit} onKeyDown={(e) => {
+      if (e.key === 'Enter') {
+        formik.handleSubmit;
+      }
+    }}>
       <div className="input-row">
         <input
           autoFocus="autofocus"
@@ -71,6 +83,9 @@ const LoginForm = ({ t }) => {
 
       {loginError &&
         <p className="form-control-error">{loginError}</p>
+      }
+      {toast &&
+        <ToastComponent message={toast} type="warning" />
       }
     </form>
   )

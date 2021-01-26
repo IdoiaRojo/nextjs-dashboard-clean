@@ -1,0 +1,94 @@
+.input-row {
+  font-size: 15px;
+  padding: 1px;
+  display: block;
+  width: 100%;
+  overflow: hidden;
+  margin-bottom: 14px;
+
+  input:not([type='radio']) {
+    padding: 6px 7px;
+    line-height: 25px;
+    font-size: 14px !important;
+    border-radius: 4px;
+    box-shadow: none !important;
+    border: 1px solid #E5ECFD;
+    height: 42px;
+    margin-bottom: 0;
+    color: #173A90;
+    background: #F5F8FD;
+    display: block;
+    width: 100%;
+  }
+
+  label {
+    font-family: 'OpenSansRegular', sans-serif;
+    font-weight: lighter;
+    font-size: 12px;
+    color: #94A5CD;
+  }
+}
+
+.form-control-error {
+  color: #FF8D8D;
+  margin-bottom: 15px;
+  font-size: 14px;
+  text-align: left;
+  margin-top: 2px;
+}
+
+.callout-container {
+  position: fixed;
+  bottom: 20px;
+  text-align: center;
+  width: 80%;
+  left: 10%;
+  right: 10%;
+
+  .callout {
+    display: inline-block;
+    position: relative;
+    width: initial;
+    float: none;
+    background-color: transparent;
+    padding: 0;
+    cursor: pointer;
+
+    ul {
+      position: relative;
+      bottom: 10%;
+      color: white;
+      padding: 10px 20px;
+      min-width: 150px;
+      border: 1px solid #2b2b2b;
+      background-color: #2b2b2b;
+      transition: all 0.2s ease;
+      box-shadow: 0 0 4px #2b2b2b;
+      -moz-transition: all 0.3s ease;
+      -webkit-transition: all 0.3s ease;
+      transition: all 0.3s ease;
+      opacity: 1;
+      font-size: 15px;
+      font-family: 'OpenSansRegular', sans-serif;
+    }
+
+    &.success ul {
+      background-color: #668C3C;
+      border-color: #668C3C;
+      box-shadow: 0 0 4px #668C3C;
+    }
+
+    &.warning ul {
+      background-color: #ac2925;
+      border-color: #ac2925;
+      box-shadow: 0 0 4px #ac2925;
+    }
+
+    &.info ul {
+      background-color: #C7DFFF;
+      border-color: #C7DFFF;
+      box-shadow: 0 0 4px #C7DFFF;
+      color: #183781;
+    }
+  }
+}

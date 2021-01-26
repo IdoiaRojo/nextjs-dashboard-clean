@@ -1,6 +1,8 @@
 import React from 'react';
 import { Line } from 'react-chartjs-2';
-import { withTranslation } from '../i18n'
+import { withTranslation } from '../i18n';
+
+import LoadingSpin from '@/components/shared/LoadingSpin'
 
 const Chart = ({ data_api, loading, t }) => {
     //console.log(this.props);
@@ -137,13 +139,16 @@ const Chart = ({ data_api, loading, t }) => {
     // }
     //};
     return (
-        <div id="chart">
+        <div className="chart-container">
             <Line
                 data={data}
                 // width={900}
                 // height={400}
                 options={options}
             />
+            {!loading &&
+                <LoadingSpin />
+            }
         </div>
     );
 }

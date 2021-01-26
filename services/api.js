@@ -42,6 +42,45 @@ async function getDashboardDataApi(select_time, req) {
         return null;
     }
 }
+async function getDashboardEventsApi(fromDate, toDate, req) {
+    var userId = null;
+    var token = null;
+    var email = null;
+    if (req) {
+        const cookies = new Cookies(req);
+        var userId = cookies.get('userId');
+        var token = cookies.get('token');
+        var email = cookies.get('email');
+    } else {
+        var userId = CookiesJS.get('userId');
+        var token = CookiesJS.get('token');
+        var email = CookiesJS.get('email');
+    }
+    if (token && userId && email) {
+        var myHeaders = new Headers();
+        myHeaders.append("X-User-Token", token);
+        myHeaders.append("X-User-Email", email);
+
+        var requestOptions = {
+            method: 'GET',
+            headers: myHeaders,
+            redirect: 'follow'
+        };
+        try {
+            const response = await fetch(`${urlBackV3}/partner/dashboard_events?id=${userId}&from=${fromDate}&to=${toDate}`, requestOptions);
+            //const response = await fetch(`${urlBackV3}/partner/dashboard_events?id=${userId}&select_time=${select_time}`, requestOptions);
+            const data = await response.json();
+            return JSON.parse(JSON.stringify(data));
+        } catch (e) {
+            console.log(e);
+            //error = e.toString();
+            return null;
+        }
+    } else {
+        console.log('no hay token');
+        return null;
+    }
+}
 
 async function getUsersDataApi(req) {
     var userId = null;
@@ -69,6 +108,7 @@ async function getUsersDataApi(req) {
         };
         try {
             const response = await fetch(`${urlBackV3}/partner/users?id=${userId}`, requestOptions);
+            console.log(response);
             const data = await response.json();
             return JSON.parse(JSON.stringify(data));
         } catch (e) {
@@ -79,5 +119,5 @@ async function getUsersDataApi(req) {
 }
 
 export default {
-    getDashboardDataApi, getUsersDataApi
+    getDashboardDataApi, getUsersDataApi, getDashboardEventsApi
 };

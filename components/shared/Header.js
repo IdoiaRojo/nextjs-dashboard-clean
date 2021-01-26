@@ -76,20 +76,20 @@ const Header = ({ user, loading, className, t }) => {
                                 </NavDropdown.Item>
                             </NavDropdown> 
                             </Nav> */}
-                            {/* <nav class="nav-right">
-                            <ul class="nav nav-select">
+                            {/* <nav className="nav-right">
+                            <ul className="nav nav-select">
                                 
-                                <li class="nav-item dropdown">
+                                <li className="nav-item dropdown">
 
-                                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                    <a className="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                                         {user.name}
                                         <img src="/images/blue-arrow-down.png" alt="" />
                                     </a>
 
-                                    <div class="dropdown-menu select-time">
-                                        <a href="/partner/dashboard?locale=es" class="dropdown-item">Español</a>
-                                        <button type="button" class="dropdown-item" data-toggle="modal" data-target="#exampleModal">Modify password</button>
-                                        <a class="dropdown-item" href="/users/sign_out" rel="nofollow" data-method="delete">Logout</a>
+                                    <div className="dropdown-menu select-time">
+                                        <a href="/partner/dashboard?locale=es" className="dropdown-item">Español</a>
+                                        <button type="button" className="dropdown-item" data-toggle="modal" data-target="#exampleModal">Modify password</button>
+                                        <a className="dropdown-item" href="/users/sign_out" rel="nofollow" data-method="delete">Logout</a>
                                     </div>
                                 </li>
                                 <li></li>

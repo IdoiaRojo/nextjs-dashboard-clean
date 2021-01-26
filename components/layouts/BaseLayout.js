@@ -17,6 +17,7 @@ import Header from '@/components/shared/Header'
 const BaseLayout = props => {
     const router = useRouter()
     const { className, user, navClass = "with-bg", loading, children } = props;
+    const [toast, setToast] = useState(false);
 
     return (
         <div className="layout-container">
@@ -37,13 +38,34 @@ const BaseLayout = props => {
                     activeKey="/home"
                     items={
                         <React.Fragment>
-                            <Nav.Item to="/users" active={router.pathname === '/users' ? true : false} icon="user">Users</Nav.Item>
-                            <Nav.Item to="/dashboard" active={router.pathname === '/dashboard' ? true : false} icon="activity">Dashboard</Nav.Item>
+                            <Nav.Item to="/DashboardComplete" active={router.pathname === '/DashboardComplete' ? true : false} icon="activity">Dashboard Complete</Nav.Item>
+                            <Nav.Item to="/DashboardOld" active={router.pathname === '/DashboardOld' ? true : false} icon="activity">Dashboard Old</Nav.Item>
+                            <Nav.Item to="/Users" active={router.pathname === '/Users' ? true : false} icon="user">Users</Nav.Item>
+                            <Nav.Item to="/Events" active={router.pathname === '/Events' ? true : false} icon="bar-chart">Events</Nav.Item>
                         </React.Fragment>
                     }
                 />
             </div>
-
+            {toast &&
+                <>
+                    <Toast>
+                        <Toast.Header>
+                            <img src="holder.js/20x20?text=%20" className="rounded mr-2" alt="" />
+                            <strong className="mr-auto">Bootstrap</strong>
+                            <small>just now</small>
+                        </Toast.Header>
+                        <Toast.Body>See? Just like this.</Toast.Body>
+                    </Toast>
+                    <Toast>
+                        <Toast.Header>
+                            <img src="holder.js/20x20?text=%20" className="rounded mr-2" alt="" />
+                            <strong className="mr-auto">Bootstrap</strong>
+                            <small>2 seconds ago</small>
+                        </Toast.Header>
+                        <Toast.Body>Heads up, toasts will stack automatically</Toast.Body>
+                    </Toast>
+                </>
+            }
             <main className={`cover ${className}`}>
                 <div className="wrapper">
                     {children}

@@ -1,0 +1,36 @@
+$c-blue-68: #687398;
+$c-blue-dark: #213A6C;
+$c-blue-pool: #4789ff;
+
+.table-new-styles {
+
+
+
+  .MuiAppBar-colorPrimary {
+    background: transparent;
+    box-shadow: none;
+    color: $c-blue-68;
+  }
+
+  .MuiButtonBase-root {
+    text-transform: unset;
+    text-align: left;
+
+
+    &.Mui-selected {
+      color: $c-blue-pool;
+    }
+  }
+
+  .MuiTab-wrapper {
+    align-items: self-start;
+  }
+
+  .MuiTab-root {
+    min-width: auto;
+  }
+
+  .PrivateTabIndicator-colorSecondary-4 {
+    background-color: unset;
+  }
+}

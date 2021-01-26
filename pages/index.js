@@ -8,7 +8,7 @@ export default function Home() {
   const router = useRouter();
   const { user, loading } = useAuth();
   if (user) {
-    router.push("/users");
+    router.push("/DashboardComplete");
   }
   return (
     <div className={styles.container}>

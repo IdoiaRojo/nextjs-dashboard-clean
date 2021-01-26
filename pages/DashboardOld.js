@@ -8,7 +8,7 @@ import BaseLayout from '@/components/layouts/BaseLayout';
 
 import ApiService from "@/services/api";
 
-const Dashboard = ({ dashboardDataInitial, t }) => {
+const DashboardOld = ({ dashboardDataInitial, t }) => {
   const { user, loading } = useAuth();
   const [dashboardData, setData] = useState(dashboardDataInitial);
   const router = useRouter();
@@ -98,4 +98,4 @@ export async function getServerSideProps(context) {
   };
 }
 
-export default withTranslation('common')(Dashboard);
+export default withTranslation('common')(DashboardOld);

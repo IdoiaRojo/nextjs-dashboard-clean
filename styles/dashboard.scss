@@ -16,6 +16,16 @@ $c-border-table: #EAEDFB;
             border-bottom: 1px solid $c-border-table;
         }
 
+        .MuiPaper-root,
+        .MuiToolbar-root {
+            //margin-bottom: 20px;
+            justify-content: flex-end;
+        }
+
+        .PrivateTabIndicator-colorPrimary-2 {
+            background: none;
+        }
+
         .MuiInputBase-input {
             color: map-get($palette, blue);
         }

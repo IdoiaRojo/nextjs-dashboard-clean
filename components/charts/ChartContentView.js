@@ -18,7 +18,7 @@ const ChartContentView = ({ data_api, loading, t }) => {
                 label: "App open",
                 fill: false,
                 backgroundColor: 'rgba(75,192,192,0.4)',
-                borderColor: '#f2c80f',
+                borderColor: '#FF8D8D',
                 pointBackgroundColor: '#fff',
                 borderCapStyle: 'round',
                 data: data_api.app_open
@@ -27,7 +27,7 @@ const ChartContentView = ({ data_api, loading, t }) => {
                 label: "App session",
                 fill: false,
                 backgroundColor: 'rgba(75,192,192,0.4)',
-                borderColor: '#1e7d83',
+                borderColor: '#24499F',
                 pointBackgroundColor: '#fff',
                 borderCapStyle: 'square',
                 data: data_api.app_session,

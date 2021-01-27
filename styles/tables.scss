@@ -3,9 +3,6 @@ $c-blue-dark: #213A6C;
 $c-blue-pool: #4789ff;
 
 .table-new-styles {
-
-
-
   .MuiAppBar-colorPrimary {
     background: transparent;
     box-shadow: none;
@@ -18,7 +15,7 @@ $c-blue-pool: #4789ff;
 
 
     &.Mui-selected {
-      color: $c-blue-pool;
+      color: $c-blue-pool !important;
     }
   }
 

@@ -3,7 +3,7 @@ import { withTranslation } from '../i18n'
 import BaseLayout from '@/components/layouts/BaseLayout';
 import UsersTable from '@/components/UsersTable';
 import PaginationTableComponent from '@/components/shared/Table';
-import DataTable from '@/components/shared/TableMaterialUi/TableMaterialUi';
+import TableUsers from '@/components/shared/TableMaterialUi/TableUsers';
 import PolarRating from '@/components/charts/PolarRating'
 
 import { useAuth } from '@/hooks/useAuth';
@@ -32,29 +32,12 @@ import {
 
 import C3Chart from "react-c3js";
 
-const Users = ({ dashboardDataInitial, usersInitial, dashboardEventsInitial, t }) => {
+const Users = ({ usersInitial, t }) => {
   const { user, loading } = useAuth();
-  const [loadingCharts, setLoadingCharts] = useState(false);
   const [usersData, setData] = useState(usersInitial);
-  const [dashboardData, setDashboardData] = useState(dashboardDataInitial);
-  const [dashboardEvents, setDashboardEvents] = useState(dashboardEventsInitial);
   const dash_col = 3;
 
-  const fetchData = async (select_time) => {
-    const dashboardData = await ApiService.getDashboardDataApi(select_time);
-    return setDashboardData(dashboardData);
-  };
-
-  const handleChange = e => {
-    setLoadingCharts(true);
-    fetchData(e.target.value).then(() => {
-      setLoadingCharts(false);
-    });
-
-  }
-
   console.log(usersData);
-  console.log(dashboardEvents);
 
   return (
     <>
@@ -66,12 +49,12 @@ const Users = ({ dashboardDataInitial, usersInitial, dashboardEventsInitial, t }
         <div className="row dashboard" id="users-dashboard">
           <div className="container" id="">
             <Grid.Row>
-              {dashboardEvents &&
+              {usersData &&
                 <Grid.Col className="section" lg={12}>
                   <h3 className="sectitle">User list</h3>
                   <h5 className="secsubtitle">{t('d_description')}</h5>
-                  <DataTable
-                    dashboardEvents={dashboardEvents.events} />
+                  <TableUsers
+                    usersActive={usersData.usersActive} usersInactive={usersData.usersInactive} />
                 </Grid.Col>
               }
               {/* {usersData &&
@@ -106,8 +89,6 @@ const Users = ({ dashboardDataInitial, usersInitial, dashboardEventsInitial, t }
 
 export async function getServerSideProps(context) {
   const usersInitial = await ApiService.getUsersDataApi(context.req);
-  const dashboardDataInitial = await ApiService.getDashboardDataApi('week', context.req);
-  const dashboardEventsInitial = await ApiService.getDashboardEventsApi('week', context.req);
   // if (usersInitial == null || dashboardDataInitial == null) {
   //   context.res.setHeader("location", "/login");
   //   context.res.statusCode = 302;
@@ -116,9 +97,7 @@ export async function getServerSideProps(context) {
 
   return {
     props: {
-      usersInitial: usersInitial,
-      dashboardDataInitial: dashboardDataInitial,
-      dashboardEventsInitial: dashboardEventsInitial,
+      usersInitial: usersInitial
     },
   };
 }

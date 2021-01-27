@@ -13,6 +13,7 @@ export const AuthProvider = ({ children }) => {
     const router = useRouter()
     const urlBackV3 = "https://staging.ifeelonline.com/api/v3"
     // const urlBackV3 = "http://localhost:3000/api/v3"
+    // const urlBackV3 = process.env.FETCH_URL
 
     useEffect(() => {
         async function loadUserFromCookies() {

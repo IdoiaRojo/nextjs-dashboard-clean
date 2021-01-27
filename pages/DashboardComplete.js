@@ -118,7 +118,7 @@ const DashboardComplete = ({ dashboardDataInitial, usersInitial, t }) => {
                 <Grid.Col className="section" lg={12}>
                   <h3 className="sectitle">User list</h3>
                   <h5 className="secsubtitle">{t('d_description')}</h5>
-                  <UsersTable users={usersData.users}></UsersTable>
+                  <UsersTable users={usersData.usersActive}></UsersTable>
                 </Grid.Col>
               }
 

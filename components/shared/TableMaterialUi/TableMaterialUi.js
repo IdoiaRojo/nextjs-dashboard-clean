@@ -18,6 +18,10 @@ import {
   MuiPickersUtilsProvider,
 } from '@material-ui/pickers';
 
+import Modal from '@material-ui/core/Modal';
+import Backdrop from '@material-ui/core/Backdrop';
+import Fade from '@material-ui/core/Fade';
+
 import AddBox from '@material-ui/icons/AddBox';
 import ArrowDownward from '@material-ui/icons/ArrowDownward';
 import Check from '@material-ui/icons/Check';
@@ -34,7 +38,7 @@ import SaveAlt from '@material-ui/icons/SaveAlt';
 import Search from '@material-ui/icons/Search';
 import ViewColumn from '@material-ui/icons/ViewColumn';
 import { DragDropContext } from 'react-beautiful-dnd';
-import { Delete, EditOutlined, Filter1Outlined, FilterListOutlined, Save, SearchOutlined, SendOutlined } from "@material-ui/icons";
+import { AddCircleOutline, Delete, EditOutlined, Filter1Outlined, FilterListOutlined, PlusOneOutlined, PlusOneRounded, Save, SearchOutlined, SendOutlined } from "@material-ui/icons";
 
 
 const tableIcons = {
@@ -59,7 +63,7 @@ const tableIcons = {
 
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
-import { dateTimeFormatter, FilterForm } from "@material-ui/data-grid";
+import { dateTimeFormatter, FilterForm, FilterListIcon } from "@material-ui/data-grid";
 import { Button } from "@material-ui/core";
 import Chip from '@material-ui/core/Chip';
 
@@ -74,17 +78,42 @@ const localeMap = {
   fr: frLocale,
 }
 
+const useStyles = makeStyles((theme) => ({
+  modal: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  paper: {
+    backgroundColor: theme.palette.background.paper,
+    border: '2px solid #000',
+    boxShadow: theme.shadows[5],
+    padding: theme.spacing(2, 4, 3),
+  },
+}));
+
 
 const DataTable = ({ dashboardEvents }) => {
+  const classes = useStyles();
+
   const [fromDate, handleFromDateChange] = useState(new Date('2020/10/10'));
   const [toDate, handleToDateChange] = useState(new Date());
   const [dashboardEventsData, setDashboardEvents] = useState(dashboardEvents);
   const [loadingTable, setLoadingTable] = useState(false);
   const [showFilters, setShowFilters] = useState(false);
+
   console.log("showFilters");
   console.log(showFilters);
   const isFirstRender = useRef(true);
   const toggleTrueFalse = () => setShowFilters(!showFilters);
+  const [open, setOpen] = useState(false);
+  const handleOpen = () => {
+    setOpen(true);
+    console.log('muestra la modal');
+  }
+  const handleClose = () => {
+    setOpen(false);
+  };
 
   const [locale, setLocale] = useState("es");
 
@@ -130,7 +159,8 @@ const DataTable = ({ dashboardEvents }) => {
               maxDate={new Date()}
               onChange={handleToDateChange}
               format={"dd/MM/yyyy"} />
-            <FilterListOutlined onClick={toggleTrueFalse} />
+            <FilterListIcon onClick={toggleTrueFalse} />
+            <AddCircleOutline onClick={handleOpen} />
           </MuiPickersUtilsProvider>
 
         </div>
@@ -171,28 +201,30 @@ const DataTable = ({ dashboardEvents }) => {
             exportButton: true,
             actionsColumnIndex: -1,
             filtering: showFilters ? true : false
-
           }}
           isLoading={loadingTable}
-        // components={{
-        //   Toolbar: props => (
-        //     <div>
-        //       <MTableToolbar {...props} />
-        //       <div style={{ padding: '0px 10px' }}>
-        //         <Button>Hola</Button>
-        //         <Chip label="Chip 1" color="secondary" style={{ marginRight: 5 }} />
-        //         <Chip label="Chip 2" color="secondary" style={{ marginRight: 5 }} />
-        //         <Chip label="Chip 3" color="secondary" style={{ marginRight: 5 }} />
-        //         <Chip label="Chip 4" color="secondary" style={{ marginRight: 5 }} />
-        //         <Chip label="Chip 5" color="secondary" style={{ marginRight: 5 }} />
-        //       </div>
-        //     </div>
-        //   ),
-        // }}
         />
 
 
-
+        <Modal
+          aria-labelledby="transition-modal-title"
+          aria-describedby="transition-modal-description"
+          className={classes.modal}
+          open={open}
+          onClose={handleClose}
+          closeAfterTransition
+          BackdropComponent={Backdrop}
+          BackdropProps={{
+            timeout: 500,
+          }}
+        >
+          <Fade in={open}>
+            <div className={classes.paper}>
+              <h2 id="transition-modal-title">Transition modal</h2>
+              <p id="transition-modal-description">react-transition-group animates me.</p>
+            </div>
+          </Fade>
+        </Modal>
       </div>
     </>
   );

@@ -42,6 +42,7 @@ const BaseLayout = props => {
                             <Nav.Item to="/DashboardOld" active={router.pathname === '/DashboardOld' ? true : false} icon="activity">Dashboard Old</Nav.Item>
                             <Nav.Item to="/Users" active={router.pathname === '/Users' ? true : false} icon="user">Users</Nav.Item>
                             <Nav.Item to="/Events" active={router.pathname === '/Events' ? true : false} icon="bar-chart">Events</Nav.Item>
+                            {/* <Nav.Item to="/Leads" active={router.pathname === '/Leads' ? true : false} icon="bar-chart">Leads</Nav.Item> */}
                         </React.Fragment>
                     }
                 />

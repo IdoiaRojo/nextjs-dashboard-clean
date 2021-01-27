@@ -19,7 +19,7 @@ const ChartChat = ({ data_api, loading, t }) => {
                 label: "Access Therapy",
                 fill: false,
                 backgroundColor: 'rgba(75,192,192,0.4)',
-                borderColor: '#f2c80f',
+                borderColor: '#FF8D8D',
                 pointBackgroundColor: '#fff',
                 borderCapStyle: 'round',
                 data: data_api.access_therapy
